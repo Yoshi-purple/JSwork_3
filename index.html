@@ -5,13 +5,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>JS課題③-1</title>
   </head>
   <body>
     <header>
       <h1>ToDoリスト</h1>
     </header>
+    <div class="devide">
+      <input type="radio" name="state" value="all" />すべて
+      <input type="radio" name="state" value="working" />作業中
+      <input type="radio" name="state" value="complete" />完了
+    </div>
+    <div class="title">
+      <span>ID</span><span> コメント</span><span> 状態</span>
+    </div>
 
+    <div class="result">
+      <ul class="resultUl">
+        <li>
+          <span>0</span> aaa <button>作業中</button> <button>削除</button>
+        </li>
+      </ul>
+      <h1>新規タスクの追加</h1>
+      <input type="text" id="newTask" />　<button>追加</button>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>

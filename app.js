@@ -1,0 +1,6 @@
+/** @format */
+
+'use strict';
+
+{
+}

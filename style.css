@@ -26,3 +26,7 @@ ul li {
   display: inline-block;
   margin-right: 0.5rem;
 }
+
+button{
+  cursor: pointer;
+}

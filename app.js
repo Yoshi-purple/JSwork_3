@@ -5,10 +5,12 @@
 {
   //要素の取得
   const todoList = document.getElementById('todo-list');
-  const btnAdd = document.getElementById('btnAdd');
   const taskInput = document.getElementById('taskInput');
-
+  
+  const btnAdd = document.getElementById('btnAdd');
   btnAdd.addEventListener('click', addList);
+  
+  
 
   let newTodo = [{ id: 'ID', comment: 'コメント', status: '状態' }];
 
@@ -23,17 +25,25 @@
   }
   listTitle();
 
+
+  const btnStatus = document.createElement('button');
+    btnStatus.innerText = '作業中';
+    const btnDelete = document.createElement('button');
+    btnDelete.innerText = '削除';
+    btnDelete.id = 'btn-del';
+    btnDelete.onclick = removeTodo;
+  
   //リストに追加する関数
   function addList() {
     const todoLi = document.createElement('li');
+    todoLi.id = 'todo_li';
     const newId = document.createElement('span');
     const newComment = document.createElement('span');
     const newStatus = document.createElement('span');
 
-    const btnStatus = document.createElement('button');
-    btnStatus.innerText = '作業中';
-    const btnDelete = document.createElement('button');
-    btnDelete.innerText = '削除';
+    
+  
+
 
     if (taskInput.value === '') {
       return;
@@ -52,8 +62,18 @@
       todoList.appendChild(todoLi);
     }
     newTodo.push({ comment: taskInput.value });
-
+    
     todoAdd();
+    console.log(newTodo)
     taskInput.value = '';
   }
+  
+  //リストから削除する関数
+  function removeTodo() {
+    //動的要素を取得
+    const todo_li = document.getElementById('todo_li');
+
+    todoList.removeChild(todo_li);
+    }
+  
 }

@@ -1,8 +1,28 @@
 /** @format */
 
-#todo-list{
+#todo-list {
+  width: auto;
   list-style: none;
   margin-left: 0;
   padding-left: 1em;
   text-indent: -1em;
+}
+
+ul {
+  list-style-position: inside;
+}
+
+ul li {
+  padding-left: 0em;
+  text-indent: -1em;
+}
+
+#todo-list li span {
+  vertical-align: bottom;
+  margin-right: 0.6em;
+}
+
+#todo-list li button {
+  display: inline-block;
+  margin-right: 0.5rem;
 }

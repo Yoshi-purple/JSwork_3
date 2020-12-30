@@ -85,13 +85,4 @@
   }
 
   //btnclass切り替えの関数
-  function checkStatus(e) {
-    let targetBtn = e.target;
-    const _btnSts = document.getElementById('btn-working');
-    if (targetBtn.innerText === '作業中') {
-      targetBtn.innerText = '完了';
-    } else {
-      targetBtn.innerText = '作業中';
-    }
-  }
 }

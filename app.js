@@ -33,6 +33,9 @@
     newComment.classList.add('todo-comment');
     const btnStatus = document.createElement('button');
     btnStatus.innerText = '作業中';
+    btnStatus.id = 'btn-working';
+    btnStatus.className = 'status';
+    btnStatus.onclick = checkStatus;
     const btnDelete = document.createElement('button');
     btnDelete.innerText = '削除';
     btnDelete.id = 'btn-del';
@@ -45,7 +48,7 @@
     function todoAdd() {
       for (let i = 0; i < newTodo.length; i++) {
         while (todoLi.lastChild) {
-          todoLi.removeChild(todoLi.lastChild)
+          todoLi.removeChild(todoLi.lastChild);
         }
 
         newId.textContent = `${i - 1}`;
@@ -57,8 +60,8 @@
       todoLi.appendChild(btnDelete);
       todoList.appendChild(todoLi);
     }
-    
-    newTodo.push({ id: newId, comment: taskInput.value});
+
+    newTodo.push({ id: newId, comment: taskInput.value });
 
     todoAdd();
     taskInput.value = '';
@@ -67,7 +70,7 @@
   function removeTodo(e) {
     let delItem = e.target;
     let delTodo = delItem.parentElement.remove();
-    
+
     newTodo.splice(delTodo, 1);
 
     //IDの振り直しの関数
@@ -76,12 +79,19 @@
   function re_num() {
     const todo_li = document.querySelectorAll('#todo-li');
     const _numId = document.querySelectorAll('.num-id');
-    for (let i = 0; i < todo_li.length; ++i){
+    for (let i = 0; i < todo_li.length; ++i) {
       _numId[i].textContent = `${i}`;
     }
   }
-  
 
-
-  
+  //btnclass切り替えの関数
+  function checkStatus(e) {
+    let targetBtn = e.target;
+    const _btnSts = document.getElementById('btn-working');
+    if (targetBtn.innerText === '作業中') {
+      targetBtn.innerText = '完了';
+    } else {
+      targetBtn.innerText = '作業中';
+    }
+  }
 }

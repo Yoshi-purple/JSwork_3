@@ -6,18 +6,10 @@
   //要素の取得
   const todoList = document.getElementById('todo-list');
   const taskInput = document.getElementById('taskInput');
-  //追加ボタンの取得
+
   const btnAdd = document.getElementById('btnAdd');
   btnAdd.addEventListener('click', addList);
-  //ラジオボタンの取得
-  const allTask = document.getElementById('allTask');
-  allTask.onclick = radioSwitchAll;
-  const workingTask = document.getElementById('workingTask');
-  workingTask.onclick = radioSwitchWork;
-  const completeTask = document.getElementById('completeTask');
-  completeTask.onclick = radioSwitchComp;
 
-  //配列
   let newTodo = [{ id: 'ID', comment: 'コメント', status: '状態' }];
 
   //最初の ID コメント　状態の表示
@@ -33,11 +25,10 @@
 
   //リストに追加する関数
   function addList() {
+    const todoDiv = document.createElement('div');
+    todoDiv.setAttribute('id', 'working');
     const todoLi = document.createElement('li');
     todoLi.id = 'todo-li';
-    todoLi.className = 'working';
-    // const todoDiv = document.createElement('div');
-    // todoDiv.className = 'working';
     const newId = document.createElement('span');
     newId.classList.add('num-id');
     const newComment = document.createElement('span');
@@ -68,8 +59,8 @@
       todoLi.appendChild(newComment);
       todoLi.appendChild(btnStatus);
       todoLi.appendChild(btnDelete);
-      // todoLi.appendChild(todoDiv);
-      todoList.appendChild(todoLi);
+      todoDiv.appendChild(todoLi);
+      todoList.appendChild(todoDiv);
     }
 
     newTodo.push({ id: newId, comment: taskInput.value });
@@ -80,9 +71,10 @@
   //リストから削除する関数
   function removeTodo(e) {
     let delItem = e.target;
-    let delTodo = delItem.parentElement.remove();
+    let delTodo = delItem.parentElement;
+    let delTodoDiv = delTodo.parentElement.remove();
 
-    newTodo.splice(delTodo, 1);
+    newTodo.splice(delTodoDiv, 1);
 
     //IDの振り直しの関数
     re_num();
@@ -98,26 +90,55 @@
   //ボタンの切り替えの関数
   function checkStatus(e) {
     let targetBtn = e.target;
-    if (targetBtn.parentElement.className === 'working') {
+    let targetLi = targetBtn.parentElement;
+    if (targetLi.parentElement.id === 'working') {
       targetBtn.innerText = '完了';
 
-      targetBtn.parentElement.classList.add('complete');
-      targetBtn.parentElement.classList.remove('working');
+      targetLi.parentElement.setAttribute('id', 'complete');
     } else {
       targetBtn.innerText = '作業中';
 
-      targetBtn.parentElement.classList.add('working');
-      targetBtn.parentElement.classList.remove('complete');
+      targetLi.parentElement.setAttribute('id', 'working');
     }
   }
 
+  //ラジオボタンの取得
+  const allTask = document.getElementById('allTask');
+  allTask.onclick = radioSwitch;
+  const workingTask = document.getElementById('workingTask');
+  workingTask.onclick = radioSwitchWork;
+  const completeTask = document.getElementById('completeTask');
+  completeTask.onclick = radioSwitchComp;
+
   //ラジオボタンによる切り替えの関数
-  //すべて
-  function radioSwitchAll() {}
-
-  //作業中
-  function radioSwitchWork() {}
-
-  //完了
-  function radioSwitchComp() {}
+  function radioSwitch() {
+    const workingTodo = document.querySelectorAll('#working');
+    const completeTodo = document.querySelectorAll('#complete');
+    for (let i = 0; i < workingTodo.length; i++) {
+      workingTodo[i].style.display = '';
+    }
+    for (let i = 0; i < completeTodo.length; i++) {
+      completeTodo[i].style.display = '';
+    }
+  }
+  function radioSwitchWork() {
+    const workingTodo = document.querySelectorAll('#working');
+    const completeTodo = document.querySelectorAll('#complete');
+    for (let i = 0; i < workingTodo.length; i++) {
+      workingTodo[i].style.display = '';
+    }
+    for (let i = 0; i < completeTodo.length; i++) {
+      completeTodo[i].style.display = 'none';
+    }
+  }
+  function radioSwitchComp() {
+    const workingTodo = document.querySelectorAll('#working');
+    const completeTodo = document.querySelectorAll('#complete');
+    for (let i = 0; i < completeTodo.length; i++) {
+      completeTodo[i].style.display = '';
+    }
+    for (let i = 0; i < workingTodo.length; i++) {
+      workingTodo[i].style.display = 'none';
+    }
+  }
 }

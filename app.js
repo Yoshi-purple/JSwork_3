@@ -10,7 +10,7 @@
   const btnAdd = document.getElementById('btnAdd');
   btnAdd.addEventListener('click', addList);
 
-  let newTodo = [{ id: 'ID', comment: 'コメント', status: '状態' }];
+  const newTodo = [{ id: 'ID', comment: 'コメント', status: '状態' }];
 
   //最初の ID コメント　状態の表示
   function listTitle() {
@@ -61,6 +61,9 @@
       todoLi.appendChild(btnDelete);
       todoDiv.appendChild(todoLi);
       todoList.appendChild(todoDiv);
+      if (completeTask.checked) {
+        todoDiv.style.display = 'none';
+      }
     }
 
     newTodo.push({ id: newId, comment: taskInput.value });
@@ -138,7 +141,9 @@
       completeTodo[i].style.display = '';
     }
     for (let i = 0; i < workingTodo.length; i++) {
-      workingTodo[i].style.display = 'none';
+      if (workingTodo[i].style.display === '') {
+        workingTodo[i].style.display = 'none';
+      }
     }
   }
 }

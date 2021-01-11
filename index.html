@@ -8,14 +8,34 @@
     <link rel="stylesheet" href="style.css" />
     <title>JS課題③-1</title>
   </head>
+
   <body>
     <header>
       <h1>ToDoリスト</h1>
     </header>
     <div class="list-devide">
-      <input type="radio" id="allTask" name="state" value="all" checked />すべて
-      <input type="radio" id="workingTask" name="state" value="working" />作業中
-      <input type="radio" id="completeTask" name="state" value="complete" />完了
+      <input
+        class="todoCheck"
+        type="radio"
+        id="allTask"
+        name="state"
+        value="all"
+        checked
+      />すべて
+      <input
+        class="todoCheck"
+        type="radio"
+        id="workingTask"
+        name="state"
+        value="working"
+      />作業中
+      <input
+        class="todoCheck"
+        type="radio"
+        id="completeTask"
+        name="state"
+        value="complete"
+      />完了
     </div>
 
     <div class="todo-container">
@@ -30,5 +50,6 @@
       <input type="text" id="taskInput" />　<button id="btnAdd">追加</button>
     </div>
     <script src="app.js"></script>
+    <!-- <script src="app02.js"></script> -->
   </body>
 </html>

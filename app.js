@@ -94,14 +94,22 @@
   function checkStatus(e) {
     let targetBtn = e.target;
     let targetLi = targetBtn.parentElement;
+    let targetDiv = targetLi.parentElement;
+
     if (targetLi.parentElement.id === 'working') {
       targetBtn.innerText = '完了';
 
       targetLi.parentElement.setAttribute('id', 'complete');
+      if (targetDiv.parentElement.className === 'workList') {
+        targetDiv.style.display = 'none';
+      }
     } else {
       targetBtn.innerText = '作業中';
 
       targetLi.parentElement.setAttribute('id', 'working');
+      if (targetDiv.parentElement.className === 'compList') {
+        targetDiv.style.display = 'none';
+      }
     }
   }
 
@@ -115,18 +123,27 @@
 
   //ラジオボタンによる切り替えの関数
   function radioSwitch() {
+    todoList.classList.remove('compList');
+    todoList.classList.remove('workList');
+    todoList.classList.add('allList');
     const workingTodo = document.querySelectorAll('#working');
     const completeTodo = document.querySelectorAll('#complete');
-    for (let i = 0; i < workingTodo.length; i++) {
-      workingTodo[i].style.display = '';
-    }
-    for (let i = 0; i < completeTodo.length; i++) {
-      completeTodo[i].style.display = '';
+    if (todoList.className === 'allList') {
+      for (let i = 0; i < workingTodo.length; i++) {
+        workingTodo[i].style.display = '';
+      }
+      for (let i = 0; i < completeTodo.length; i++) {
+        completeTodo[i].style.display = '';
+      }
     }
   }
   function radioSwitchWork() {
+    todoList.classList.remove('allList');
+    todoList.classList.remove('compList');
+    todoList.classList.add('workList');
     const workingTodo = document.querySelectorAll('#working');
     const completeTodo = document.querySelectorAll('#complete');
+
     for (let i = 0; i < workingTodo.length; i++) {
       workingTodo[i].style.display = '';
     }
@@ -135,15 +152,16 @@
     }
   }
   function radioSwitchComp() {
+    todoList.classList.remove('allList');
+    todoList.classList.remove('workList');
+    todoList.classList.add('compList');
     const workingTodo = document.querySelectorAll('#working');
     const completeTodo = document.querySelectorAll('#complete');
     for (let i = 0; i < completeTodo.length; i++) {
       completeTodo[i].style.display = '';
     }
     for (let i = 0; i < workingTodo.length; i++) {
-      if (workingTodo[i].style.display === '') {
-        workingTodo[i].style.display = 'none';
-      }
+      workingTodo[i].style.display = 'none';
     }
   }
 }

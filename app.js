@@ -10,7 +10,7 @@
   const btnAdd = document.getElementById('btnAdd');
   btnAdd.addEventListener('click', addList);
 
-  let newTodo = [{ id: 'ID', comment: 'コメント', status: '状態' }];
+  const newTodo = [{ id: 'ID', comment: 'コメント', status: '状態' }];
 
   //最初の ID コメント　状態の表示
   function listTitle() {
@@ -25,6 +25,8 @@
 
   //リストに追加する関数
   function addList() {
+    const todoDiv = document.createElement('div');
+    todoDiv.setAttribute('id', 'working');
     const todoLi = document.createElement('li');
     todoLi.id = 'todo-li';
     const newId = document.createElement('span');
@@ -33,8 +35,12 @@
     newComment.classList.add('todo-comment');
     const btnStatus = document.createElement('button');
     btnStatus.innerText = '作業中';
+
+    // btnStatus.className = 'working';
+=======
     btnStatus.id = 'btn-working';
     btnStatus.className = 'status';
+
     btnStatus.onclick = checkStatus;
     const btnDelete = document.createElement('button');
     btnDelete.innerText = '削除';
@@ -58,7 +64,11 @@
       todoLi.appendChild(newComment);
       todoLi.appendChild(btnStatus);
       todoLi.appendChild(btnDelete);
-      todoList.appendChild(todoLi);
+      todoDiv.appendChild(todoLi);
+      todoList.appendChild(todoDiv);
+      if (completeTask.checked) {
+        todoDiv.style.display = 'none';
+      }
     }
 
     newTodo.push({ id: newId, comment: taskInput.value });
@@ -69,6 +79,12 @@
   //リストから削除する関数
   function removeTodo(e) {
     let delItem = e.target;
+
+    let delTodo = delItem.parentElement;
+    let delTodoDiv = delTodo.parentElement.remove();
+
+    newTodo.splice(delTodoDiv, 1);
+=======
     let delTodo = delItem.parentElement.remove();
 
     newTodo.splice(delTodo, 1);
@@ -84,5 +100,83 @@
     }
   }
 
+
+  //ボタンの切り替えの関数
+  function checkStatus(e) {
+    let targetBtn = e.target;
+    let targetLi = targetBtn.parentElement;
+    let targetDiv = targetLi.parentElement;
+
+    if (targetLi.parentElement.id === 'working') {
+      targetBtn.innerText = '完了';
+
+      targetLi.parentElement.setAttribute('id', 'complete');
+      if (targetDiv.parentElement.className === 'workList') {
+        targetDiv.style.display = 'none';
+      }
+    } else {
+      targetBtn.innerText = '作業中';
+
+      targetLi.parentElement.setAttribute('id', 'working');
+      if (targetDiv.parentElement.className === 'compList') {
+        targetDiv.style.display = 'none';
+      }
+    }
+  }
+
+  //ラジオボタンの取得
+  const allTask = document.getElementById('allTask');
+  allTask.onclick = radioSwitch;
+  const workingTask = document.getElementById('workingTask');
+  workingTask.onclick = radioSwitchWork;
+  const completeTask = document.getElementById('completeTask');
+  completeTask.onclick = radioSwitchComp;
+
+  //ラジオボタンによる切り替えの関数
+  function radioSwitch() {
+    todoList.classList.remove('compList');
+    todoList.classList.remove('workList');
+    todoList.classList.add('allList');
+    const workingTodo = document.querySelectorAll('#working');
+    const completeTodo = document.querySelectorAll('#complete');
+    if (todoList.className === 'allList') {
+      for (let i = 0; i < workingTodo.length; i++) {
+        workingTodo[i].style.display = '';
+      }
+      for (let i = 0; i < completeTodo.length; i++) {
+        completeTodo[i].style.display = '';
+      }
+    }
+  }
+  function radioSwitchWork() {
+    todoList.classList.remove('allList');
+    todoList.classList.remove('compList');
+    todoList.classList.add('workList');
+    const workingTodo = document.querySelectorAll('#working');
+    const completeTodo = document.querySelectorAll('#complete');
+
+    for (let i = 0; i < workingTodo.length; i++) {
+      workingTodo[i].style.display = '';
+    }
+    for (let i = 0; i < completeTodo.length; i++) {
+      completeTodo[i].style.display = 'none';
+    }
+  }
+  function radioSwitchComp() {
+    todoList.classList.remove('allList');
+    todoList.classList.remove('workList');
+    todoList.classList.add('compList');
+    const workingTodo = document.querySelectorAll('#working');
+    const completeTodo = document.querySelectorAll('#complete');
+    for (let i = 0; i < completeTodo.length; i++) {
+      completeTodo[i].style.display = '';
+    }
+    for (let i = 0; i < workingTodo.length; i++) {
+      workingTodo[i].style.display = 'none';
+    }
+  }
+=======
+
   //btnclass切り替えの関数
+
 }

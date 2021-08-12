@@ -2,37 +2,54 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>JS課題③-1</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <title>JS課題③-1</title>
-</head>
+  <body>
+    <header>
+      <h1>ToDoリスト</h1>
+    </header>
+    <div class="list-devide">
+      <input
+        class="todoCheck"
+        type="radio"
+        id="allTask"
+        name="state"
+        value="all"
+        checked
+      />すべて
+      <input
+        class="todoCheck"
+        type="radio"
+        id="workingTask"
+        name="state"
+        value="working"
+      />作業中
+      <input
+        class="todoCheck"
+        type="radio"
+        id="completeTask"
+        name="state"
+        value="complete"
+      />完了
+    </div>
 
-<body>
-  <header>
-    <h1>ToDoリスト</h1>
-  </header>
-  <div class="list-devide">
-    <input type="radio" name="state" value="all" />すべて
-    <input type="radio" name="state" value="working" />作業中
-    <input type="radio" name="state" value="complete" />完了
-  </div>
-
-  <div class="todo-container">
-    <ul id="todo-list">
-      <li>
-        <span class="id"></span>
-        <span class="comment"></span>
-        <span class="status"></span>
-      </li>
-    </ul>
-    <h1>新規タスクの追加</h1>
-    <input type="text" id="taskInput" />　<button id="btnAdd">追加</button>
-  </div>
-  <script src="app.js"></script>
-  <!-- <script src="app02.js"></script> -->
-</body>
-
+    <div class="todo-container">
+      <ul id="todo-list">
+        <li>
+          <span class="id"></span>
+          <span class="comment"></span>
+          <span class="status"></span>
+        </li>
+      </ul>
+      <h1>新規タスクの追加</h1>
+      <input type="text" id="taskInput" />　<button id="btnAdd">追加</button>
+    </div>
+    <script src="app.js"></script>
+    <!-- <script src="app02.js"></script> -->
+  </body>
 </html>

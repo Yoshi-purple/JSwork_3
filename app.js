@@ -35,7 +35,12 @@
     newComment.classList.add('todo-comment');
     const btnStatus = document.createElement('button');
     btnStatus.innerText = '作業中';
+
     // btnStatus.className = 'working';
+=======
+    btnStatus.id = 'btn-working';
+    btnStatus.className = 'status';
+
     btnStatus.onclick = checkStatus;
     const btnDelete = document.createElement('button');
     btnDelete.innerText = '削除';
@@ -74,10 +79,15 @@
   //リストから削除する関数
   function removeTodo(e) {
     let delItem = e.target;
+
     let delTodo = delItem.parentElement;
     let delTodoDiv = delTodo.parentElement.remove();
 
     newTodo.splice(delTodoDiv, 1);
+=======
+    let delTodo = delItem.parentElement.remove();
+
+    newTodo.splice(delTodo, 1);
 
     //IDの振り直しの関数
     re_num();
@@ -89,6 +99,7 @@
       _numId[i].textContent = `${i}`;
     }
   }
+
 
   //ボタンの切り替えの関数
   function checkStatus(e) {
@@ -164,4 +175,8 @@
       workingTodo[i].style.display = 'none';
     }
   }
+=======
+
+  //btnclass切り替えの関数
+
 }
